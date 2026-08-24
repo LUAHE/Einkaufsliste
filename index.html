@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f766e">
+  <meta name="description" content="Eine schnelle, offlinefähige Einkaufsliste für iPhone und andere Geräte.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Einkaufsliste">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>Einkaufsliste</title>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">MEINE LISTE</p>
+        <h1>Einkaufsliste</h1>
+        <p id="summary" class="summary">Noch keine Artikel</p>
+      </div>
+      <button id="themeButton" class="icon-button" type="button" aria-label="Darstellung wechseln" title="Darstellung wechseln">◐</button>
+    </header>
+
+    <section class="composer" aria-label="Artikel hinzufügen">
+      <form id="itemForm">
+        <label class="sr-only" for="itemName">Artikel</label>
+        <div class="main-input-row">
+          <input id="itemName" name="itemName" type="text" maxlength="80" autocomplete="off" placeholder="Was brauchst du?" required>
+          <button class="add-button" type="submit">Hinzufügen</button>
+        </div>
+        <div class="detail-row">
+          <label>
+            <span>Menge</span>
+            <input id="itemQuantity" name="itemQuantity" type="text" maxlength="20" placeholder="1">
+          </label>
+          <label>
+            <span>Kategorie</span>
+            <select id="itemCategory" name="itemCategory">
+              <option>Lebensmittel</option>
+              <option>Getränke</option>
+              <option>Haushalt</option>
+              <option>Drogerie</option>
+              <option>Sonstiges</option>
+            </select>
+          </label>
+        </div>
+      </form>
+    </section>
+
+    <nav class="toolbar" aria-label="Listenfilter">
+      <div class="filters" role="group" aria-label="Artikel filtern">
+        <button class="filter active" type="button" data-filter="all">Alle</button>
+        <button class="filter" type="button" data-filter="open">Offen</button>
+        <button class="filter" type="button" data-filter="done">Erledigt</button>
+      </div>
+      <button id="moreButton" class="text-button" type="button">Optionen</button>
+    </nav>
+
+    <section class="list-card" aria-live="polite">
+      <ul id="shoppingList" class="shopping-list"></ul>
+      <div id="emptyState" class="empty-state">
+        <div class="empty-icon" aria-hidden="true">✓</div>
+        <h2>Liste bereit</h2>
+        <p>Füge oben deinen ersten Artikel hinzu.</p>
+      </div>
+    </section>
+
+    <p class="privacy-note">Deine Liste bleibt auf diesem Gerät gespeichert und funktioniert offline.</p>
+  </main>
+
+  <dialog id="optionsDialog">
+    <form method="dialog" class="dialog-card">
+      <div class="dialog-header">
+        <h2>Optionen</h2>
+        <button class="icon-button" value="close" aria-label="Schliessen">×</button>
+      </div>
+      <button id="sortButton" class="dialog-action" type="button">Nach Kategorie sortieren</button>
+      <button id="shareButton" class="dialog-action" type="button">Liste teilen oder kopieren</button>
+      <button id="clearDoneButton" class="dialog-action" type="button">Erledigte entfernen</button>
+      <button id="clearAllButton" class="dialog-action danger" type="button">Ganze Liste löschen</button>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
